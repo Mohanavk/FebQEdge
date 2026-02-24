@@ -1,7 +1,7 @@
 //how to handle multiple browser contexts in playwright to test multi user scenarios,
 //  parellel test execution,isolating test data,testing with different states
 
-const {chromium}= require {'playwright'};
+const {chromium}= require('playwright');
 
 //launch browser
 
@@ -25,4 +25,6 @@ await page2.goto("https://example.com");
 
 await context1.close();
 await context2.close();
-await browser.clsoe();
+await browser.close();
+
+export {};
