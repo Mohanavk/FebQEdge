@@ -40,9 +40,23 @@ test("Handling Radio Buttons and Checkboxes",async({page})=>{
 
 })
 
+test('Select multiple weekdays dynamically', async ({ page }) => {
+
+    await page.goto("https://testautomationpractice.blogspot.com/");
+
+  const daysToSelect = ['Monday', 'Wednesday', 'Friday'];
+
+  for (const day of daysToSelect) {
+    const checkbox = page.getByRole('checkbox', { name: day });
+    await checkbox.check();
+    await expect(checkbox).toBeChecked();
+  }
+  await page.waitForTimeout(3000);
+});
+
 test("Handling text value of an element",async({page})=>{
 await page.goto("https://testautomationpractice.blogspot.com/");
-//textContent : to get text value of an element even if the element ois hidden on the page
+//* /textContent : to get text value of an element even if the element ois hidden on the page
 //innerText(): to get text value of an element but will ignore the hidden text
 const text=await page.locator(".post-title").innerText();
 console.log(text);
@@ -54,7 +68,15 @@ console.log(text);
 const allTexts =await page.locator("h2.title").allInnerTexts();
 console.log(allTexts);
 const count= await page.locator("h2.title").count();
-console.log(count);
+console.log(count); 
+ 
+
+//to get all links on the web page
+
+const allLinks = page.getByRole('link');
+
+const texts = await allLinks.allInnerTexts();
+console.log(texts);
 
 
 })
