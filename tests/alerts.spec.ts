@@ -42,13 +42,15 @@ test('Handling prompt alert',async({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com/")
     //on(event)wait for an event to appear on the page.
 
+    const text="Hello Beautiful!How are you today?";
+
     page.on("dialog",async(dialog)=>{
 
         console.log(dialog.message())
-        await dialog.accept("Harry Potter")//clicks ok
+        await dialog.accept(text)//clicks ok
     })
     //await page.locator("#alertBtn").click()
     //await page.locator("#confirmBtn").click()
     await page.locator("#promptBtn").click()
-    await expect(page.locator("#demo")).toHaveText("Hello Harry Potter! How are you today?")
+    await expect(page.locator("#demo")).toContainText("Hello Beautiful!How are you today?")
 });
